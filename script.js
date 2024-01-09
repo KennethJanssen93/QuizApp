@@ -6,6 +6,14 @@ let questions = [ // Json in einem Array
         "answer_3": "Tim Berners-Lee",
         "answer_4": "Justin Bieber",
         "right_answer": 3
+    },
+    {
+        "question": "platzhalter",
+        "answer_1": "platzhalter",
+        "answer_2": "platzhalter",
+        "answer_3": "platzhalter",
+        "answer_4": "platzhalter",
+        "right_answer": 2
     }
 ];
 
@@ -36,9 +44,15 @@ function answer(selection){ //Diese Funktion selektiert, welche Frage angeklickt
     console.log('SelectedQuestinNumer is ',selectedQuestionNumber) //Konsolenausgabe ob die richtige Zahl von 'answer_' ausgewählt wurde.
     console.log('Current question is', question['right_answer']) //Konsolenausgabe als Abfrage, welche Antwort die richtige Wäre
 
+    let idOfRightAnswer = `answer_${question['right_answer']}`;
+
     if (selectedQuestionNumber == question['right_answer']) { //If-else Abfrage ob der Wert von 'selectedQuestionNumber dem Wert von 'question['right_answer'] entspricht. Also ist die Angewählte Frage auch die richtige Frage.
         console.log('Richtige Antwort'); //Konsolenausgabe, wenn die Antwort richtig ausgewählt wurde.
+        document.getElementById(selection).parentNode.classList.add('bg-success');
     } else {
         console.log('falsche Antwort'); //Konsolenausgabe, wenn die Antwort falsch ausgewählt wurde.
+        document.getElementById(selection).parentNode.classList.add('bg-danger');
+        document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success');
     }
+    document.getElementById('next-button').disabled = false;
 }
