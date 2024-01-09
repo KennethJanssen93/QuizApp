@@ -21,7 +21,7 @@ let questions = [ // Json in einem Array
 let currentQuestion = 0; // weist der Variabel "currentQuestion" den Wert 0 zu (0 weil erste Stelle im Array 0 ist)
 
 function init(){ //initialisiert automatisch die Anzahl der gesamten Fragen und die Funktion showQuestion()
-    document.getElementById('all-questions').innerHTML = questions.length;
+    document.getElementById('all-questions').innerHTML = questions.length; //zeigt die Anzahl aller verfügbaren Fragen an.
 
     showQuestion();
 }
@@ -29,6 +29,7 @@ function init(){ //initialisiert automatisch die Anzahl der gesamten Fragen und 
 function showQuestion() { //Diese Funktion überträgt die Werte aus dem JSON auf die HTML Card
     let question = questions[currentQuestion]; 
 
+document.getElementById('question-number').innerHTML = currentQuestion + 1;
 document.getElementById('questiontext').innerHTML = question['question'];
 document.getElementById('answer_1').innerHTML = question['answer_1'];
 document.getElementById('answer_2').innerHTML = question['answer_2'];
@@ -51,8 +52,27 @@ function answer(selection){ //Diese Funktion selektiert, welche Frage angeklickt
         document.getElementById(selection).parentNode.classList.add('bg-success');
     } else {
         console.log('falsche Antwort'); //Konsolenausgabe, wenn die Antwort falsch ausgewählt wurde.
-        document.getElementById(selection).parentNode.classList.add('bg-danger');
+        document.getElementById(selection).parentNode.classList.add('bg-danger'); //parentNode bearbeitet das Element was dem angeklickten übergeordnet ist.
         document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success');
     }
-    document.getElementById('next-button').disabled = false;
+    document.getElementById('next-button').disabled = false; //aktiviert den vorab deaktiverten Button.
+}
+
+function nextQuestion() {
+    currentQuestion++; // Die Variable wird um 1 erhöht (Aus dem Array zB von 0 auf 1).
+    showQuestion();
+    document.getElementById('next-button').disabled = true; // Button wird wieder deaktiviert.
+    
+    resetAnswers();
+}
+
+function resetAnswers() {
+    document.getElementById('answer_1').parentNode.classList.remove('bg-danger'); //.remove entfernt die nachfolgende CSS klasse.
+    document.getElementById('answer_1').parentNode.classList.remove('bg-success');
+    document.getElementById('answer_2').parentNode.classList.remove('bg-danger');
+    document.getElementById('answer_2').parentNode.classList.remove('bg-success');
+    document.getElementById('answer_3').parentNode.classList.remove('bg-danger');
+    document.getElementById('answer_3').parentNode.classList.remove('bg-success');
+    document.getElementById('answer_4').parentNode.classList.remove('bg-danger');
+    document.getElementById('answer_4').parentNode.classList.remove('bg-success');
 }
