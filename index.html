@@ -28,19 +28,26 @@
   <div class="container">
 
     <div class="card quiz-card">
-      <img src="img/Group 5.png" class="card-img-top">
+      <img src="img/Group 5.png" id="header-image" class="card-img-top">
+
+      <div class="progress"> <!-- Fortschrittsbalken -->
+        <div class="progress-bar" id="progress-bar" role="progressbar" aria-label="Example with label"
+          style="width: 0%;">25%</div>
+      </div>
 
       <div class="card-body" id="endScreen" style="display: none;"> <!-- Endscreen nach allen Fragen -->
-        <div class=".text-center">
+        <div class="text-center quiz-end">
           Quiz beendet!
         </div>
 
-        <div>
-          <img class=".width-100" src="img/trophy.jpg" style="width: 100%;">
-        </div>
-        <div class=".text-center">
+        <div class="text-center">
           Du hast <b id="amountOfRightQuestions">0</b> Fragen von <b id="amountOfQuestions">5</b> richtig beantwortet.
         </div>
+
+        <div class="button-center">
+          <button onclick="restartGame()" class="btn btn-primary" disabled>Erneut spielen</button>
+        </div>
+
       </div>
 
       <div class="card-body" id="questionBody"> <!-- Die Karte für die Frage und die Antwortmöglichkeiten -->

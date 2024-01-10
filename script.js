@@ -31,17 +31,24 @@ function init() { //initialisiert automatisch die Anzahl der gesamten Fragen und
 function showQuestion() { //Diese Funktion überträgt die Werte aus dem JSON auf die HTML Card
 
     if (currentQuestion >= questions.length) { //Abfrage ob die Variable "currentQuestion" größer ist als die Variable "questions.lenght"
-        // TODO: Show End Screen
         document.getElementById('endScreen').style = ''; // das style tag des Elementes mit der ID 'endScreen' wird entfernt.
         document.getElementById('questionBody').style = 'display: none'; // dem Element mit der ID 'questionBody' wird der css befehl 'display: none' hinzugefügt.
     
         document.getElementById('amountOfQuestions').innerHTML = questions.length; // zeigt im Endscreen die Anzahl aller Fragen aus dem Array an.
-        document.getElementById('amountOfRightQuestions').innerHTML = rightQuestions;
-    } else {
+        document.getElementById('amountOfRightQuestions').innerHTML = rightQuestions; //zeigt im Endscreen die Anzahl der richtig beantworteten Fragen an.
+        document.getElementById('header-image').src = 'img/trophy.jpg'; //Ändert das Bild vom Quiz in ein anderes Bild.
+        } else {
 
-        let question = questions[currentQuestion];
+        let percent = (currentQuestion +1) / questions.length; //berechnet die Prozentzahl der aktuellen Frage durch alle Fragen.
+        percent = Math.round(percent * 100); // Porzentzahl wird auf volle Zahlen gerundet.
 
-        document.getElementById('question-number').innerHTML = currentQuestion + 1;
+        document.getElementById('progress-bar').innerHTML = `${percent} %`; //Anzeige der aktuellen Prozentzahl in der Leiste.
+        console.log('percent of progress:', percent) //consolenbefehl zur Überprüfung.
+        document.getElementById('progress-bar').style = `width: ${percent}%`; //der Wert von 'width' in dem tag 'style' wird auf die Prozent angepasst.
+
+        let question = questions[currentQuestion]; // weißt der Varbialbe 'question' den Wert der Variable 'questions[currentQuestion] zu.
+
+        document.getElementById('question-number').innerHTML = currentQuestion + 1; //currentQuestion wird auf den Wert 1 festgelegt (arrays starten ja bei 0).
         document.getElementById('questiontext').innerHTML = question['question'];
         document.getElementById('answer_1').innerHTML = question['answer_1'];
         document.getElementById('answer_2').innerHTML = question['answer_2'];
@@ -63,7 +70,7 @@ function answer(selection) { //Diese Funktion selektiert, welche Frage angeklick
     if (selectedQuestionNumber == question['right_answer']) { //If-else Abfrage ob der Wert von 'selectedQuestionNumber dem Wert von 'question['right_answer'] entspricht. Also ist die Angewählte Frage auch die richtige Frage.
         console.log('Richtige Antwort'); //Konsolenausgabe, wenn die Antwort richtig ausgewählt wurde.
         document.getElementById(selection).parentNode.classList.add('bg-success');
-        document.getElementById('amountOfRightQuestions').innerHTML = rightQuestions++; // Der Wert der Variable 'rightQuestions' wird um 1 erhöht.
+        rightQuestions++; // Der Wert der Variable 'rightQuestions' wird um 1 erhöht.
         
     } else {
         console.log('falsche Antwort'); //Konsolenausgabe, wenn die Antwort falsch ausgewählt wurde.
